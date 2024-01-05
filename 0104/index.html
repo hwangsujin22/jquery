@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>미에로화이바 반응형웹</title>
+  <!-- 초기화 -->
+  <link href="./css/reset.css" rel="stylesheet" type="text/css">
+  <!-- 공통서식 (글꼴, 크기, 색상, 링크) -->
+  <link href="./css/base.css" rel="stylesheet" type="text/css">
+  <!-- pc화면 해상도일 때 적용되는 서식 -->
+  <link href="./css/pc.css" rel="stylesheet" type="text/css">
+  <!-- tablet화면 해상도일 때 적용되는 서식 -->
+  <link href="./css/tablet.css" rel="stylesheet" type="text/css">
+  <!-- mobile화면 해상도일 때 적용되는 서식 -->
+  <link href="./css/mobile.css" re="stylesheet" type="text/css">
+  <!-- 폰트어썸 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+
+</head>
+<body>
+  <!-- 헤더영역 시작 -->
+  <header>
+    <h1>
+      <a href="index.html" title="메인페이지로 바로가기">
+        <img src="./images/logo2.png" alt="상단로고">
+      </a>
+    </h1>
+
+    <!-- 모바일 버전에서 나오는 토글버튼 -->
+    <div id="toggle">
+      <span>&nbsp;</span>
+      <span>&nbsp;</span>
+      <span>&nbsp;</span>
+    </div>
+
+    <!-- 메인메뉴 -->
+    <nav class="gnb">
+      <ul>
+        <li><a href="#" title="미에로">미에로<i class="fas fa-angle-down"></i></a></li>
+        <li><a href="#" title="제품소개">제품소개<i class="fas fa-angle-down"></i></a></li>
+        <li><a href="#" title="미에로스토리">미에로스토리<i class="fas fa-angle-down"></i></a></li>
+        <li><a href="#" title="미에로이벤트">미에로이벤트<i class="fas fa-angle-down"></i></a></li>
+        <li><a href="#" title="공지사항">공지사항</a></li>
+      </ul>
+    </nav>
+
+  </header>
+
+  <!-- 메인영역 시작 -->
+  <main>
+    <article class="visual">
+      <h2>메인슬라이드</h2>
+      <div class="slide1">
+        <span>이제 짜릿하게 즐기자!<br>미에로화이바 스파클링 제로</span>
+        <img src="./images/visual01.jpg" alt="메인이미지1">
+      </div>
+      <div class="slide2">
+        <span>마시는 식이섬유<br>미에로화이바</span>
+        <img src="./images/visual02.jpg" alt="메인이미지2">
+      </div>
+      <div class="slide3">
+        <img src="./images/visual03.jpg" alt="메인이미지3">
+      </div>
+      <!-- 공통 ui구성요소 sns, 컨트롤버튼, 좌우버튼 -->
+
+      <!-- sns아이콘 -->
+      <ul class="sns">
+        <li><a href="#" title="페이스북"><i class="fab fa-facebook-f"></i></a></li>
+        <li><a href="#" title="인스타그램"><i class="fab fa-instagram"></i></a></li>
+        <li><a href="#" title="유튜브"><i class="fab fa-youtube"></i></a></li>
+      </ul>
+
+      <!-- 좌,우 방향버튼 -->
+      <ul class="s_btn">
+        <li><img src="./images/left.png" alt="이전버튼"></li>
+        <li><img src="./images/right.png" alt="다음버튼"></li>
+      </ul>
+
+      <!-- 컨트롤버튼 -->
+      <ul class="ctrl_btn">
+        <li class="on">&nbsp;</li>
+        <li>&nbsp;</li>
+        <li>&nbsp;</li>
+      </ul>
+    </article>
+  </main>
+  
+  <!-- 푸터영역 시작 -->
+  <footer></footer>
+
+
+  <!-- 제이쿼리 라이브러리 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+
+  <script>
+    $(document).ready(function(){
+
+      // 1. 변수선언
+      const l_btn = $('.s_btn li:first-child'); //왼쪽 버튼
+      const r_btn = $('.s_btn li:last-child'); //오른쪽 버튼
+      const c_btn = $('.ctrl_btn li'); //컨트롤 버튼
+      let v_slide_img = $('.visual > div'); //슬라이드 이미지
+
+      let i = 0;
+
+      // 2. 움직이는 함수 = 서서히 사라지고 나타나는 효과
+      function bannerEffect(){
+        // console.log('시간함수 호출');
+        v_slide_img.fadeOut(); //보이는 이미지 숨기고
+        if(i==2){ //만약에 마지막 이미지라면
+          i=0; //처음이미지가 보이게 하고
+        }else{ //그렇지 않다면
+          i++; //다음 이미지가 보이도록 한다.
+        }
+        v_slide_img.eq(i).stop().fadeIn(); //해당 이미지가 보이게 한다. (stop은 한번만 넘어가게 막아주는 것)
+      }
+      function bannerEffect2(){
+        v_slide_img.fadeOut();
+        if(i==0){
+          i=2;
+        }else{
+          i--;
+        }
+        v_slide_img.eq(i).stop().fadeIn();
+      }
+
+      // 3. 매 5초마다 함수를 반복호출하여 슬라이드가 변하게 한다.
+      let Timer = setInterval(bannerEffect, 5000);
+
+      // 좌,우 버튼 클릭시 해당하는 방향으로 슬라이드 이미지가 나오게 하기
+      l_btn.click(function(){
+        bannerEffect2();
+      });
+
+      r_btn.click(function(){
+        bannerEffect();
+      });
+
+      // 좌, 우 버튼에 마우스 오버시 시간을 제거하고
+      $('.s_btn > li').hover(function(){
+        clearInterval(Timer);
+      },function(){ //다시 마우스 아웃시 시간을 생성하여 다시 움직이게 한다.
+        Timer = setInterval(bannerEffect, 5000);
+      });
+
+    });
+  </script>
+
+</body>
+</html>
