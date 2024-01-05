@@ -3,143 +3,143 @@
   <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
-<title>제이쿼리 선택자 학습하기(기본선택자, 탐색, 속성)</title>
-<style>
-#wrap > div{
-  width:700px; 
-  border:2px solid #EF1B50; 
-  margin-bottom:20px;
-  }
-  
-body{ 
-  font-family:'nanumgothic', sans-serif; 
-  font-size:14px;
-  color:#333;
-  }
+  <title>제이쿼리 선택자 학습하기(기본선택자, 탐색, 속성)</title>
+  <style>
+    #wrap > div{
+      width:700px; 
+      border:2px solid #EF1B50; 
+      margin-bottom:20px;
+      }
+      
+    body{ 
+      font-family:'nanumgothic', sans-serif; 
+      font-size:14px;
+      color:#333;
+      }
 
-button{
-  width:150px;  height:30px;  margin-left:20px;}
-  
-h3{
-  background-color:#EF1B50; 
-  margin-top:0px; 
-  color:#FFF; 
-  padding:5px;
-  }
-  
-</style>
-<!-- 제이쿼리 라이브러리 연결 -->
-<script src="../script/jquery-3.7.1.js"></script>
-<!-- 제이쿼리 랩퍼 -->
-<script>
-  $(document).ready(function(){
-    // 변수선언
-    const b1 = $('.btn1');
-    const b2 = $('.btn2');
-    const b3 = $('.btn3');
-    const b4 = $('.btn4');
+    button{
+      width:150px;  height:30px;  margin-left:20px;}
+      
+    h3{
+      background-color:#EF1B50; 
+      margin-top:0px; 
+      color:#FFF; 
+      padding:5px;
+      }
+      
+  </style>
+  <!-- 제이쿼리 라이브러리 연결 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  <!-- 제이쿼리 랩퍼 -->
+  <script>
+    $(document).ready(function(){
+      // 변수선언
+      const b1 = $('.btn1');
+      const b2 = $('.btn2');
+      const b3 = $('.btn3');
+      const b4 = $('.btn4');
 
-    // 버튼 클릭시 해당 내용 적용하기 click, mouseover=mouseenter, mouseout=mouseleave
-    // dblClick(더블클릭)
-    // http://oscarotero.com/jquery/
-    b1.click(function(){
-      $('#jquery').css('color','#f00');
-    });
+      // 버튼 클릭시 해당 내용 적용하기 click, mouseover=mouseenter, mouseout=mouseleave
+      // dblClick(더블클릭)
+      // http://oscarotero.com/jquery/
+      b1.click(function(){
+        $('#jquery').css('color','#f00');
+      });
 
-    b2.click(function(){
-      $('.tutorial').css('color','#0f0');
-    });
+      b2.click(function(){
+        $('.tutorial').css('color','#0f0');
+      });
 
-    b3.click(function(){
-      $('li').css('color','#f0f');
-    });
-    b4.click(function(){
-      $('#jquery').css('color','#00f');
-      $('#MYSQL').css('background','#ccc');
-    })
+      b3.click(function(){
+        $('li').css('color','#f0f');
+      });
+      b4.click(function(){
+        $('#jquery').css('color','#00f');
+        $('#MYSQL').css('background','#ccc');
+      })
 
-    const b5 = $('.btn5');
-    const b6 = $('.btn6');
-    const b7 = $('.btn7');
-    const b8 = $('.btn8');
-    const b9 = $('.btn9');
-    const b10 = $('.btn10');
-    const b11 = $('.btn11');
+      const b5 = $('.btn5');
+      const b6 = $('.btn6');
+      const b7 = $('.btn7');
+      const b8 = $('.btn8');
+      const b9 = $('.btn9');
+      const b10 = $('.btn10');
+      const b11 = $('.btn11');
 
-    b5.click(function(){
-      $('#list li:eq(2)').css('text-decoration','underline');
-    });
-    b6.click(function(){
-      $('#list li:gt(1)').css('text-decoration','underline').css('color','#f00');
-    });
-    b7.click(function(){
-      $('#list li:lt(2)').css('background','#000').css('color','#fff');
-    });
-    b8.click(function(){
-      $('#list li:even').css('background','#f00').css('color','#ccc');
-    });
-    b9.click(function(){
-      $('#list li:odd').css('background','#0f0');
-    });
-    b10.click(function(){
-      $('#list li:first').css('font-size','25px').css('font-weight','bold');
-    });
-    b11.click(function(){
-      $('#list li:last').css('font-size','40px');
-    });
+      b5.click(function(){
+        $('#list li:eq(2)').css('text-decoration','underline');
+      });
+      b6.click(function(){
+        $('#list li:gt(1)').css('text-decoration','underline').css('color','#f00');
+      });
+      b7.click(function(){
+        $('#list li:lt(2)').css('background','#000').css('color','#fff');
+      });
+      b8.click(function(){
+        $('#list li:even').css('background','#f00').css('color','#ccc');
+      });
+      b9.click(function(){
+        $('#list li:odd').css('background','#0f0');
+      });
+      b10.click(function(){
+        $('#list li:first').css('font-size','25px').css('font-weight','bold');
+      });
+      b11.click(function(){
+        $('#list li:last').css('font-size','40px');
+      });
 
-    const b12 = $('.btn12');
-    const b13 = $('.btn13');
-    const b14 = $('.btn14');
-    const b15 = $('.btn15');
-    const b16 = $('.btn16');
-    const b17 = $('.btn17');
-    const b18 = $('.btn18');
+      const b12 = $('.btn12');
+      const b13 = $('.btn13');
+      const b14 = $('.btn14');
+      const b15 = $('.btn15');
+      const b16 = $('.btn16');
+      const b17 = $('.btn17');
+      const b18 = $('.btn18');
 
-    b12.click(function(){
-      $('[target*="BC"]').css('font-weight','bold');
-    });
-    b13.click(function(){
-      $('[target="DEFG"]').css('font-style','italic').css('color','#f00');
-    });
-    b14.click(function(){
-      $('[target!="DEFG"]').css('color','#ccc');
-    });
-    b15.click(function(){
-      $('[target^="B"]').css('font-size','25px');
-    });
-    b16.click(function(){
-      $('[target$="H"]').css('background','#00f').css('color','#fff');
-    });
-    b17.click(function(){
-      $('[target]').css('font-size','50px');
-    });
-    b18.click(function(){
-      $('[target][id]').css('color','#ff0');
-    });
+      b12.click(function(){
+        $('[target*="BC"]').css('font-weight','bold');
+      });
+      b13.click(function(){
+        $('[target="DEFG"]').css('font-style','italic').css('color','#f00');
+      });
+      b14.click(function(){
+        $('[target!="DEFG"]').css('color','#ccc');
+      });
+      b15.click(function(){
+        $('[target^="B"]').css('font-size','25px');
+      });
+      b16.click(function(){
+        $('[target$="H"]').css('background','#00f').css('color','#fff');
+      });
+      b17.click(function(){
+        $('[target]').css('font-size','50px');
+      });
+      b18.click(function(){
+        $('[target][id]').css('color','#ff0');
+      });
 
-    const b19 = $('.btn19');
-    const b20 = $('.btn20');
-    const b21 = $('.btn21');
-    const b22 = $('.btn22');
+      const b19 = $('.btn19');
+      const b20 = $('.btn20');
+      const b21 = $('.btn21');
+      const b22 = $('.btn22');
 
-    b19.click(function(){
-      $('[type="text"]').css('border','2px solid #00f');
-    });
-    b20.click(function(){
-      $('[type="text"]:disabled').css('background','#ccc');
-    });
-    b21.click(function(){
-      $('[type="text"]:enabled').css('background','#000').css('color','#fff');
-    });
-    b22.click(function(){
-      $('input:checked').css('float','right');
-    });
+      b19.click(function(){
+        $('[type="text"]').css('border','2px solid #00f');
+      });
+      b20.click(function(){
+        $('[type="text"]:disabled').css('background','#ccc');
+      });
+      b21.click(function(){
+        $('[type="text"]:enabled').css('background','#000').css('color','#fff');
+      });
+      b22.click(function(){
+        $('input:checked').css('float','right');
+      });
 
 
 
-  });
-</script>
+    });
+  </script>
 </head>
 <body>
 <h2>제이쿼리 선택자 학습하기(기본선택자, 탐색, 속성)</h2>
@@ -174,12 +174,12 @@ h3{
 <div id="filter">
 <h3>filter</h3>
 <ul id="list">
-   <li> HTML </li>
-   <li> CSS </li>
-   <li> javascript </li>
-   <li> jquery </li>
-   <li> PHP </li>
-   <li> MYSQL </li><br>
+  <li> HTML </li>
+  <li> CSS </li>
+  <li> javascript </li>
+  <li> jquery </li>
+  <li> PHP </li>
+  <li> MYSQL </li><br>
 </ul> 
 <div id="button">  
 <p><button class="btn5">#list li:eq(2)</button> - 인자와 인덱스가 동일한 엘리먼트를 찾아내는 선택자</p> 
@@ -201,12 +201,12 @@ h3{
 <div id="property">
 <h3>속 성</h3>
 <ul id="attribute">
-   <li target="ABCD"> ABCD </li>
-   <li target="BCDE"> BCDE </li>
-   <li target="CDEF"> CDEF </li>
-   <li target="DEFG"> DEFG </li>
-   <li target="EFGH"> EFGH </li>
-   <li target="FGHI" id="FGHI"> FGHI </li><br>
+  <li target="ABCD"> ABCD </li>
+  <li target="BCDE"> BCDE </li>
+  <li target="CDEF"> CDEF </li>
+  <li target="DEFG"> DEFG </li>
+  <li target="EFGH"> EFGH </li>
+  <li target="FGHI" id="FGHI"> FGHI </li><br>
 </ul> 
 <div id="button">  
 <p><button class="btn12">[target*="BC"]</button> - 속성의 값에 주어진 문자열이 포함되는 엘리먼트를 찾아내는 선택자</p> 
