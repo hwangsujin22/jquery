@@ -109,20 +109,24 @@
       function bannerEffect(){
         // console.log('시간함수 호출');
         v_slide_img.fadeOut(); //보이는 이미지 숨기고
+        $('.visual .ctrl_btn li').removeClass('on'); //컨트롤 버튼 서식 모두 제거
         if(i==2){ //만약에 마지막 이미지라면
           i=0; //처음이미지가 보이게 하고
         }else{ //그렇지 않다면
           i++; //다음 이미지가 보이도록 한다.
         }
+        $('.visual .ctrl_btn li').eq(i).addClass('on'); //선택한 컨트롤 버튼에 서식 적용
         v_slide_img.eq(i).stop().fadeIn(); //해당 이미지가 보이게 한다. (stop은 한번만 넘어가게 막아주는 것)
       }
       function bannerEffect2(){
         v_slide_img.fadeOut();
+        $('.visual .ctrl_btn li').removeClass('on'); //컨트롤 버튼 서식 모두 제거
         if(i==0){
           i=2;
         }else{
           i--;
         }
+        $('.visual .ctrl_btn li').eq(i).addClass('on'); //선택한 컨트롤 버튼에 서식 적용
         v_slide_img.eq(i).stop().fadeIn();
       }
 
@@ -142,6 +146,42 @@
       $('.s_btn > li').hover(function(){
         clearInterval(Timer);
       },function(){ //다시 마우스 아웃시 시간을 생성하여 다시 움직이게 한다.
+        Timer = setInterval(bannerEffect, 5000);
+      });
+
+      // pagination(컨트롤 버튼)
+      // 1. 현재이미지 번호를 체크
+      // 2. 이미지 전체 개수
+
+      /*
+        구현순서
+        1. 컨트롤 버튼 변수 선언
+        2. 컨트롤 버튼(li) 클릭시 인덱스값 0,1,2 값을 출력
+        3. 인덱스 값을 bannerEffect함수의 매개변수값으로 넘김 => 슬라이드가 변함
+        4. 사용자가 클릭한 컨트롤 버튼(li)에 act서식을 적용하여 어둡게함.
+      */
+
+      c_btn.click(function(){
+        clearInterval(Timer); //기존 자동슬라이드 제거
+
+        let idx = $(this).index();
+        console.log(idx); //0,1,2
+
+        v_slide_img.fadeOut(); //보이는 이미지 숨기고
+        $('.visual .ctrl_btn li').removeClass('on'); //컨트롤 버튼 서식 모두 제거
+
+        $('.visual .ctrl_btn li').eq(idx).addClass('on'); //선택한 컨트롤 버튼에 서식 적용
+        v_slide_img.eq(idx).stop().fadeIn(); //해당 이미지가 보이게 한다. (stop은 한번만 넘어가게 막아주는 것)
+
+        i = idx; //원래 i값에 idx값을 일치시켜서 다음 순서가 제대로 나오게
+      });
+
+      // 컨트롤버튼에 마우스 아웃시 다시 자동으로 움직이도록 시간객체를 생성함.
+      c_btn.mouseenter(function(){
+        clearInterval(Timer);
+      });
+
+      c_btn.mouseleave(function(){
         Timer = setInterval(bannerEffect, 5000);
       });
 
