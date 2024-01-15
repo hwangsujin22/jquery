@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>쿠팡 메인슬라이드 구현</title>
+  <style>
+    *{margin:0px; padding:px;}
+    a{text-decoration:none; color:#000;}
+    ul{list-style:none;}
+    .main_box{
+      width:100%;
+    }
+    .main_box > h3{display:none;}
+    .main_box > nav{
+      width:1020px;
+      margin:0px auto;
+      position:relative;
+    }
+    .main_box ul{
+      position:absolute;
+      top:30px; right:0px;
+    }
+    .main_box ul a{
+      display:block;
+      width:180px; height:60px;
+    }
+    .main_box ul a img{width:100%;height:100%;}
+  </style>
+</head>
+<body>
+  <h2>쿠팡 메인슬라이드 구현</h2>
+
+  <article class="main_box">
+    <h3>쿠팡 메인슬라이드</h3>
+    <nav>
+      <ul>
+        <li>
+          <a href="./images/coupang_img01.jpg" title="메인1">
+            <img src="./images/coupon.jpg" alt="쿠폰혜택">
+          </a>
+        </li>
+        <li>
+          <a href="./images/coupang_img02.jpg" title="메인2">
+            <img src="./images/tonymoly.jpg" alt="토니모리">
+          </a>
+        </li>
+        <li>
+          <a href="./images/coupang_img03.jpg" title="메인3">
+            <img src="./images/big_sale.jpg" alt="빅세일 ~60%">
+          </a>
+        </li>
+        <li>
+          <a href="./images/coupang_img04.jpg" title="메인4">
+            <img src="./images/mediangs.jpg" alt="메디앙스">
+          </a>
+        </li>
+        <li>
+          <a href="./images/coupang_img05.jpg" title="메인5">
+            <img src="./images/dr_u.jpg" alt="닥터유">
+          </a>
+        </li>
+        <li>
+          <a href="./images/coupang_img06.jpg" title="메인6">
+            <img src="./images/care.jpg" alt="뷰티 보습케어">
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <img src="./images/coupang_img01.jpg" alt="쿠폰혜택" id="main_img">
+  </article>
+
+  <!-- 제이쿼리 라이브러리 연결 -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
+  <script>
+    $(document).ready(function(){
+      let img_src;
+      let main_mnu = $('.main_box nav li a');
+      let main_mnu_img = $('.main_box nav li a img');
+
+      // 마우스 오버시 해당 이미지 노출, 메뉴 빨간 테두리
+      main_mnu.mouseenter(function(){
+        img_src = $(this).attr('href');
+        console.log(img_src);
+        $('#main_img').attr('src', img_src);
+
+        $(this).css('border', '2px solid #00f').css('box-sizing', 'border-box');
+      });
+
+      // 마우스 빼면 다시 테두리 없애기
+      main_mnu.mouseleave(function(){
+        $(this).css('border', 'none');
+      });
+
+      // 3초마다 슬라이드 이미지 바뀌기
+      let img = ['./images/coupang_img01.jpg', './images/coupang_img02.jpg', './images/coupang_img03.jpg', './images/coupang_img04.jpg', './images/coupang_img05.jpg', './images/coupang_img06.jpg']
+      // const slide_img = $('#main_img');
+      let i = 0;
+      function banner(){
+        $('#main_img').attr('src', img[i]);
+        if(i==5){
+          i=0;
+        }else{
+          i++;
+        }
+      }
+      let Timer = setInterval(banner, 5000);
+
+      main_mnu.hover(function(){
+        clearInterval(Timer);
+      },function(){
+        Timer = setInterval(banner, 5000);
+      });
+
+    });
+  </script>
+</body>
+</html>

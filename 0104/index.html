@@ -185,6 +185,36 @@
         Timer = setInterval(bannerEffect, 5000);
       });
 
+      // 윈도우창의 너비값 = $(window).width(); or $(window).height();
+      // $(window).innerWidth(); 패딩값을 포함한 너비
+
+      let w_width;
+
+      // 브라우저의 크기가 변하면 함수내용을 실행한다.
+      $(window).resize(function(){
+
+        w_width = $(window).innerWidth();
+        console.log(w_width);
+        
+        if(w_width>=1025){
+          // pc버전 해상도일 경우 배경색 노랑
+          $('body').css('background', '#ff0');
+
+          $('header h1 img').attr('src', './images/logo2.png');
+        }else if(w_width>=768){
+          // tablet버전 해상도일 경우 배경색 초록
+          $('body').css('background', '#0f0');
+
+          $('header h1 img').attr('src', './images/logo.png');
+        }else{
+          // mobile버전 해상도일 경우 배경색 회색
+          $('body').css('background', '#ccc');
+
+          $('header h1 img').attr('src', './images/logo.png');
+        }
+      }).resize();
+
+
     });
   </script>
 
