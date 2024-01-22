@@ -18,6 +18,8 @@
       width:100%;
       border-top:3px solid #ff7c98;
       background:url('./images/bg_header.gif');
+      position:absolute;
+      z-index:1000;
     }
     #h_top, #h_bottom{
       width:1200px; margin:0px auto;
@@ -81,12 +83,50 @@
     #h_bottom:hover::after{
       opacity:1;
     }
+    .sub{padding-top:10px;}
+
+    /* 메인컨텐츠 서식 */
+    main{padding-top:181px;}
+    .v_slide{
+      /* width:1600px; height:679px; */
+      width:100%;
+      margin:0px auto;
+      position:relative;
+      overflow:hidden;
+    }
+    .v_slide > h2{display:none;}
+    .v_slide > .slide_wrap{
+      display:flex;
+      /* width:8000px; */
+      width:500%;
+    }
+    .v_slide > .slide_wrap > div{
+      /* width:1600px; */
+      width:100%;
+    }
+    .v_slide > .slide_wrap > div img{width:100%;}
+    .v_slide i.fas{
+      position:absolute;
+      font-size:40px;
+      background:rgba(255,255,255,0.8);
+      top:50%; transform:translateY(-50%);
+      padding:10px;
+      cursor:pointer;
+    }
+    .v_slide i.fa-angle-left{left:0px;}
+    .v_slide i.fa-angle-right{right:0px;}
 
   </style>
+  <!-- 아이콘폰트 주소 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   <!-- 제이쿼리 라이브러리 연결 -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8/jquery.min.js"></script>
   <script>
     $(document).ready(function(){
+
+      // 변수선언
+      const slbtn = $('.v_slide i.fa-angle-left');
+      const srbtn = $('.v_slide i.fa-angle-right');
 
       // 사용자가 gnb에 마우스오버시 h_bottom높이가 300으로 커지면서 서브가 보이게하고 
       $('.gnb').mouseenter(function(){
@@ -99,6 +139,63 @@
       });
 
       // 사용법 - .animate({'속성':'값'}, 시간, 속도, 콜백함수);
+
+      // 메인슬라이드 스크립트------------------------------------------------------
+
+      // 1. 첫번째 슬라이드 앞에 마지막 슬라이드를 배치한다.
+      $('.slide_wrap div:last-child').insertBefore('.slide_wrap div:first-child');
+
+      // 2. 첫번째 슬라이드가 가운데 보이도록 왼쪽으로 -1600px 이동
+      // $('.slide_wrap').css('margin-left', '-1600px');
+      $('.slide_wrap').css('margin-left', '-100%');
+
+      // 3. 왼쪽으로 이동하기 위한 함수
+      function moveLeft(){
+        // 왼쪽으로 1칸 이동하고
+        // $('.slide_wrap').animate({'margin-left' : '-3200px'},500,function(){
+        $('.slide_wrap').animate({'margin-left' : '-200%'},500,function(){
+          // 왼쪽 5번 슬라이드를 4번 슬라이드 뒤쪽으로 자리를 옮긴다.
+          $('.slide_wrap div:first-child').insertAfter('.slide_wrap div:last-child');
+          // 왼쪽으로 2칸 밀리는걸 다시 제자리로 오게끔 -1600px 준다.
+          // $('.slide_wrap').css('margin-left','-1600px');
+          $('.slide_wrap').css('margin-left','-100%');
+        });
+      }
+
+      // 함수 3초마다 호출
+      let Timer = setInterval(moveLeft, 3000);
+
+      // 4. 오른쪽으로 이동하기 위한 함수
+      function moveRight(){
+        // 오른쪽으로 1칸 이동하고
+        $('.slide_wrap').animate({'margin-left' : '0px'},500,function(){
+          // 오른쪽의 마지막 슬라이드를 왼쪽 첫번째 슬라이드 앞쪽으로 자리를 옮긴다.
+          $('.slide_wrap div:last-child').insertBefore('.slide_wrap div:first-child');
+          // $('.slide_wrap').css('margin-left','-1600px');
+          $('.slide_wrap').css('margin-left','-100%');
+        });
+      }
+
+      // 5. 좌, 우 버튼 클릭시 해당함수 호출하여 슬라이드 움직이게 하기
+      slbtn.click(function(){
+        clearInterval(Timer); //시간제거
+        moveRight();
+      });
+      srbtn.click(function(){
+        clearInterval(Timer); //시간제거
+        moveLeft();
+      });
+
+      // 좌, 우 버튼에 마우스를 빼면
+      $('.v_slide i.fas').mouseleave(function(){
+        clearInterval(Timer); //기존시간을 없애고
+        Timer = setInterval(moveLeft, 3000); //3초마다 함수를 호출하여 슬라이드가 움직이게 함
+      });
+      
+
+      // 버그 - 시간객체와 클릭시 함수 동작이 겹쳐서 두번 이동하는 현상이 발생
+      // 해결방법 - 좌, 우 버튼에 마우스 오버시 시간제거/마우스 아웃시 시간 다시 생성
+
 
     });
   </script>
@@ -169,5 +266,23 @@
       </nav>
     </div>
   </header>
+
+  <!-- 메인콘텐츠 영역 시작 -->
+  <main>
+    <article class="v_slide">
+      <h2>메인슬라이드</h2>
+      <div class="slide_wrap">
+        <div><a href="#" title=""><img src="./images/slide01.png" alt="메인1"></a></div>
+        <div><a href="#" title=""><img src="./images/slide02.png" alt="메인2"></a></div>
+        <div><a href="#" title=""><img src="./images/slide3.jpg" alt="메인3"></a></div>
+        <div><a href="#" title=""><img src="./images/slide4.jpg" alt="메인4"></a></div>
+        <div><a href="#" title=""><img src="./images/slide5.jpg" alt="메인5"></a></div>
+      </div>
+      <i class="fas fa-angle-left"></i>
+      <i class="fas fa-angle-right"></i>
+    </article>
+  </main>
+
+
 </body>
 </html>
